@@ -8,19 +8,26 @@ import { assets } from "@/constants/assets";
 import Image from "next/image";
 
 const Navbar = () => {
-  const defaultTheme = localStorage.getItem("isDarkMode") === "true";
-  const [isDarkMode, setIsDarkMode] = useState(defaultTheme);
-  const element = document.documentElement;
+  const [isDarkMode, setIsDarkMode] = useState<boolean>();
+
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode === "true") {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {
-      element.classList.add("dark");
+      document.body.classList.add("dark");
       localStorage.setItem("isDarkMode", "true");
     } else {
-      element.classList.remove("dark");
+      document.body.classList.remove("dark");
       localStorage.setItem("isDarkMode", "false");
     }
-  }, [element.classList, isDarkMode]);
+  }, [isDarkMode]);
 
   return (
     <nav className="px-4 py-4 sm:px-6 lg:px-8 bg-dark">

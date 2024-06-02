@@ -4,8 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { LoadingSpinner } from "./loadingSpinner";
 import { assets } from "@/constants/assets";
 import Image from "next/image";
-const searchParams = new URLSearchParams(window.location.search);
-const prefillVar = searchParams.get("share");
 
 export default function Form() {
   const [data, setData] = useState<{
@@ -20,6 +18,15 @@ export default function Form() {
   const previousUserInput = useRef<string>();
   const hasUserInputChanged = previousUserInput.current !== userInput;
   const [isCopied, setIsCopied] = useState(false);
+  const [prefillVar, setPrefillVar] = useState<string | null>(null);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const shareValue = searchParams.get("share");
+    if (shareValue) {
+      setPrefillVar(shareValue);
+    }
+  }, []);
 
   function clearDataBeforeFetch() {
     setErrorMessage(false);
@@ -98,7 +105,7 @@ export default function Form() {
       setUserInput(prefillVar);
       fetchData();
     }
-  }, [fetchData, isUserInputBlank]);
+  }, [fetchData, isUserInputBlank, prefillVar]);
 
   return (
     <div className="py-5 md:mb-0 lg:py-12 px-[14px] dark:bg-dark">
