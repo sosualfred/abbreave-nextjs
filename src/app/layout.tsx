@@ -16,6 +16,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="Abbreve" />
+        <meta property="og:image" content="/src/assets/thumbnail.png" />
+        <meta name="twitter:card" content="/src/assets/thumbnail.png" />
+        <meta name="description" content="Open-source dictionary for slang." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <script
+          async
+          type="module"
+          src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+          async
+          noModule
+          src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+        ></script>
+        {/* <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+          rel="stylesheet"
+        /> */}
+        <title>Abbreve</title>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
